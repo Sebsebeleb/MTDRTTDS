@@ -15,11 +15,20 @@ public class EnemyMove : MonoBehaviour
     private List<Vector3> waypointList = new List<Vector3>();
     private int waypointCount = 0;
     private bool isMoving;
+    private Seeker seeker;
 
+    private void Awake()
+    {
+        seeker = GetComponent<Seeker>();
+    }
     // Use this for initialization
     private void Start()
     {
-        Seeker seeker = GetComponent<Seeker>();
+        RecalculatePath();
+    }
+
+    public void RecalculatePath()
+    {
         seeker.StartPath(transform.position, TargetDestination, OnPathComplete);
     }
 

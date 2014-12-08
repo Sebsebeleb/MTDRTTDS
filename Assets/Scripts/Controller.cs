@@ -4,8 +4,12 @@ using Pathfinding;
 
 public class Controller : MonoBehaviour {
 
+	public AstarPath TileMap;
+
 	public GameObject TowerObj;
 	public LayerMask TowerBlock;
+
+	public bool Placing = false;
 
 	private SpriteRenderer renderer = new SpriteRenderer();
 
@@ -18,10 +22,18 @@ public class Controller : MonoBehaviour {
 	void Update () {
 
 		GetMousePos();
-		PreviewTower();
 
-		if (Input.GetMouseButton (0)) {
-			PlaceTower();
+		if (Placing) {
+			PreviewTower();
+
+			if (Input.GetMouseButton (0)) {
+				PlaceTower();
+			}
+
+			if (Input.GetMouseButton (1)) {
+				Placing = false;
+				renderer.sprite = null;
+			}
 		}
 	
 	}
@@ -43,6 +55,8 @@ public class Controller : MonoBehaviour {
 
 		GameObject ins = Instantiate (TowerObj as Object) as GameObject;
 		ins.transform.position = Grid.Position (mousePos);
+
+		TileMap.Scan();
 	}
 
 	/// <summary>

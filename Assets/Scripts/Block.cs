@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-	public bool PowerOn = false;
+	private bool power = false;
 
 	private float Health = 100;
 
@@ -13,6 +13,14 @@ public class Block : MonoBehaviour {
 
 	void Update () {
 	
+	}
+
+	void PowerOn () {
+		power = true;
+	}
+	
+	void PowerOff () {
+		power = false;
 	}
 
 	void Damage (float amount) {

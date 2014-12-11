@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
+	public GameObject Apparatus;
+
 	private bool power = false;
 
 	private float Health = 100;

@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class Grid {
+public static class Grid
+{
+    public static int MapWidth = 50;
+    public static int MapHeight = 100;
+
+    public static LayerMask ObstacleLayer;
 
 	/// <summary>
 	/// Round a Vector2.
@@ -14,4 +19,19 @@ public static class Grid {
 		return vect;
 	}
 
+    /// <summary>
+    /// Get the tower block game object at the specified world position, if it exists.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns>Block</returns>
+    public static GameObject GetBlockAtPosition(Vector2 pos)
+    {
+           
+		GameObject block = Physics2D.OverlapPoint(pos, ObstacleLayer).gameObject;
+        if (block.tag != "Block") {
+            return null;
+        }
+
+        return block;
+    }
 }

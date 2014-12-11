@@ -67,6 +67,7 @@ public class Controller : MonoBehaviour {
 
 		GameObject ins = Instantiate (TowerObj as Object) as GameObject;
 		ins.transform.position = Grid.Position (mousePos);
+        ins.BroadcastMessage("OnBuilt");
 
 		TileMap.Scan();
 	}

@@ -314,7 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c875f721b5049ce9bfb98a639d3a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Apparatus: {fileID: 0}
+  App: {fileID: 0}
+  power: 0
 --- !u!61 &1396660324
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -424,6 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a6b70a5318744788b0517a36f8e06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurnTime: .699999988
+  AimDir: 0
 --- !u!1 &2105932308
 GameObject:
   m_ObjectHideFlags: 0

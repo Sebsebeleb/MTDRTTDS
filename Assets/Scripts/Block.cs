@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-	public GameObject Apparatus;
+	public Apparatus App;
 
-	private bool power = false;
+	public bool power = false;
 
 	private float Health = 100;
 
@@ -15,21 +15,34 @@ public class Block : MonoBehaviour {
 
 	void Update () {
 	
+		if (App != null && power == true) {
+			UpdateApparatus();
+		}
+
 	}
 
-	void PowerOn () {
+	public void PowerOn () {
 		power = true;
 	}
 	
-	void PowerOff () {
+	public void PowerOff () {
 		power = false;
 	}
 
-	void Damage (float amount) {
+	public void Damage (float amount) {
 		Health -= amount;
 		if (Health <= 0) {
 			Destroy(gameObject);
 		}
+	}
+
+	public void SetApparatus (GameObject app) {
+		App = app.GetComponent<Apparatus>();
+		app.transform.position = transform.position;
+	}
+
+	void UpdateApparatus () {
+		App.AimDir += 1;
 	}
 
 }

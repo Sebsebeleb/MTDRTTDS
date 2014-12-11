@@ -15,6 +15,7 @@ public class MinionManager : MonoBehaviour {
 	void Update () {
 	
 	}
+	
 
     void OnUpdateMap()
     {

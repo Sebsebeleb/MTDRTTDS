@@ -10,17 +10,17 @@ public class Controller : MonoBehaviour {
 	public LayerMask TowerBlock;
 
 	public bool Placing = false;
-
+	
 	public Sprite SelectionSprite;
 	public GameObject Selected;
 
-	private SpriteRenderer renderer = new SpriteRenderer();
+	private SpriteRenderer mainRender = new SpriteRenderer();
 
 	private Vector2 mousePos = new Vector2();
 	private Collider2D coll;
 	
 	void Start () {
-		renderer = GetComponent<SpriteRenderer>();
+		mainRender = GetComponent<SpriteRenderer>();
 		SetTower(TowerObj); //REMOVE ME LATER
 	}
 
@@ -37,7 +37,8 @@ public class Controller : MonoBehaviour {
 
 			if (Input.GetMouseButton (1)) {
 				Placing = false;
-				renderer.sprite = null;
+				mainRender.sprite = null;
+
 			}
 		}
 		else {
@@ -77,10 +78,10 @@ public class Controller : MonoBehaviour {
 	/// </summary>
 	void PreviewTower () {
 		if ( coll == null ) {
-			renderer.material.SetColor ("_Color", Color.green);
+			mainRender.material.SetColor ("_Color", Color.green);
 		}
 		else {
-			renderer.material.SetColor ("_Color", Color.red);
+			mainRender.material.SetColor ("_Color", Color.red);
 		}
 		transform.position = mousePos;
 	}
@@ -91,7 +92,7 @@ public class Controller : MonoBehaviour {
 	/// <param name="obj">Tower.</param>
 	void SetTower (GameObject obj) {
 		TowerObj = obj;
-		renderer.sprite = TowerObj.GetComponent<SpriteRenderer>().sprite;
+		mainRender.sprite = TowerObj.GetComponent<SpriteRenderer>().sprite;
 		Placing = true;
 	}
 
@@ -102,13 +103,13 @@ public class Controller : MonoBehaviour {
 	void GetTower () {
 		if (coll != null) {
 			Selected = coll.gameObject;
-			renderer.material.SetColor ("_Color", Color.white);
-			renderer.sprite = SelectionSprite;
+			mainRender.material.SetColor ("_Color", Color.white);
+			mainRender.sprite = SelectionSprite;
 			transform.position = mousePos;
 		}
 		else {
 			Selected = null;
-			renderer.sprite = null;
+			mainRender.sprite = null;
 		}
 	}
 

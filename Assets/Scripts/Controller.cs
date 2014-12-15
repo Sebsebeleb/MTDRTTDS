@@ -22,6 +22,7 @@ public class Controller : MonoBehaviour {
 	void Start () {
 		mainRender = GetComponent<SpriteRenderer>();
 		SetTower(TowerObj); //REMOVE ME LATER
+	    AstarPath.OnGraphsUpdated += OnMapUpdated;
 	}
 
 	void Update () {
@@ -68,9 +69,10 @@ public class Controller : MonoBehaviour {
 
 		GameObject ins = Instantiate (TowerObj as Object) as GameObject;
 		ins.transform.position = Grid.Position (mousePos);
-        ins.BroadcastMessage("OnBuilt");
+        ins.BroadcastMessage("OnBuilt", SendMessageOptions.DontRequireReceiver);
 
-		TileMap.Scan();
+		//TileMap.Scan();
+        AstarPath.active.UpdateGraphs(ins.collider2D.bounds);
 	}
 
 	/// <summary>
@@ -112,6 +114,15 @@ public class Controller : MonoBehaviour {
 			mainRender.sprite = null;
 		}
 	}
+
+    /// <summary>
+    /// Called by the pathfinding when the tilemap has been updated, used to update paths
+    /// </summary>
+    void OnMapUpdated(AstarPath path)
+    {
+        Debug.Log("hello?");
+        BroadcastMessage("OnPathRecalculate");
+    }
 
 }
 

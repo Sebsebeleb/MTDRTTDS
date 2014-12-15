@@ -17,7 +17,7 @@ public class MinionManager : MonoBehaviour {
 	}
 	
 
-    void OnUpdateMap()
+    public void OnPathRecalculate()
     {
         foreach (EnemyMove minion in enemyList) {
             minion.RecalculatePath();
@@ -26,7 +26,7 @@ public class MinionManager : MonoBehaviour {
 
     public void SpawnMinion(GameObject minion, Vector3 spawnPos)
     {
-        enemyList.Add(minion.GetComponent<EnemyMove>());
         GameObject newMinion = Instantiate(minion, spawnPos, Quaternion.identity) as GameObject;
+        enemyList.Add(newMinion.GetComponent<EnemyMove>());
     }
 }

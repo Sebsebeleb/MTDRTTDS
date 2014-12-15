@@ -10,9 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
@@ -57,7 +55,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: ba6f2e6a47146de46b2dccf05d3ef766, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: .5, y: .280000001}
   m_Center: {x: 0, y: 0}
@@ -82,18 +80,6 @@ MonoBehaviour:
   bezierTangentLength: .100000001
   offset: .200000003
   factor: .100000001
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 2
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,27 +94,7 @@ MonoBehaviour:
   TargetDestination: {x: 3, y: 3, z: 3}
   WaypointCheckRadius: .200000003
   MovementSpeed: 2500
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 3
-  smoothType: 2
-  subdivisions: 2
-  iterations: 2
-  strength: 1
-  uniformLength: 1
-  maxSegmentLength: 2
-  bezierTangentLength: .400000006
-  offset: .370000005
-  factor: .560000002
+  seeker: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,7 +110,7 @@ MonoBehaviour:
   detailedGizmos: 0
   saveGetNearestHints: 1
   startEndModifier:
-    priority: 4
+    priority: 2
     addPoints: 0
     exactStartPoint: 3
     exactEndPoint: 3

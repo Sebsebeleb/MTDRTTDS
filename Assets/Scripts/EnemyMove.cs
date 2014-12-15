@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Pathfinding;
 
+[RequireComponent(typeof(Seeker))]
 public class EnemyMove : MonoBehaviour
 {
     public Vector3 TargetDestination;
@@ -11,28 +12,52 @@ public class EnemyMove : MonoBehaviour
     public float WaypointCheckRadius = 0.2f;
     public float MovementSpeed = 0.4f;
 
+    protected Seeker seeker;
     private Path path;
     private List<Vector3> waypointList = new List<Vector3>();
     private int waypointCount = 0;
     private bool isMoving;
-    private Seeker seeker;
+    private bool startHasRun = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         seeker = GetComponent<Seeker>();
     }
+
     // Use this for initialization
     private void Start()
     {
-        RecalculatePath();
+        startHasRun = true;
+        OnEnable();
+    }
+
+    protected virtual void OnEnable()
+    {
+        if (startHasRun) {
+            seeker.pathCallback += OnPathComplete;
+            RecalculatePath();
+        }
+    }
+
+    public void OnDisable()
+    {
+        // Abort calculation of path
+        if (seeker != null && !seeker.IsDone()) seeker.GetCurrentPath().Error();
+
+        // Release current path
+        if (path != null) path.Release(this);
+        path = null;
+
+        //Make sure we receive callbacks when paths complete
+        seeker.pathCallback -= OnPathComplete;
     }
 
     public void RecalculatePath()
     {
-        seeker.StartPath(transform.position, TargetDestination, OnPathComplete);
+        seeker.StartPath(transform.position, TargetDestination);
     }
 
-    private void OnPathComplete(Path p)
+    public virtual void OnPathComplete(Path p)
     {
         isMoving = true;
 
@@ -41,18 +66,12 @@ public class EnemyMove : MonoBehaviour
         if (waypointList.Count != 0) {
             NextWaypoint = waypointList[0];
         }
-        Debug.Log(NextWaypoint);
-        Debug.Log(waypointList.Count);
     }
 
     private void ReachWaypoint()
     {
         waypointCount++;
-        Debug.Log(waypointCount);
-        Debug.Log(waypointList);
-        Debug.Log(waypointList.Count);
         NextWaypoint = waypointList[waypointCount];
-        Debug.Log(NextWaypoint);
     }
 
     // Update is called once per frame
@@ -68,7 +87,6 @@ public class EnemyMove : MonoBehaviour
         Vector3 f = (NextWaypoint - transform.position).normalized*MovementSpeed*Time.deltaTime;
         rigidbody2D.AddForce(f);
         if (HasReachedWaypoint()) {
-            print("Reached");
             ReachWaypoint();
         }
     }

@@ -38,11 +38,12 @@ public class Block : MonoBehaviour {
 
 	public void SetApparatus (GameObject app) {
 		App = app.GetComponent<Apparatus>();
-		app.transform.position = transform.position;
+		App.transform.position = transform.position;
 	}
 
 	void UpdateApparatus () {
-		App.AimDir += 1;
+		if (App.transform.position != transform.position) App.transform.position = transform.position;
+		if (power) App.hasPower = true;
 	}
 
 }

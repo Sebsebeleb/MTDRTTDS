@@ -229,6 +229,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9bea6bd13cc77f94a9225a61b0f04e9b, type: 2}
+      propertyPath: App
+      value: 
+      objectReference: {fileID: 2037513658}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bea6bd13cc77f94a9225a61b0f04e9b, type: 2}
   m_RootGameObject: {fileID: 1396660322}
@@ -314,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c875f721b5049ce9bfb98a639d3a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  App: {fileID: 0}
+  App: {fileID: 2037513658}
   power: 0
 --- !u!61 &1396660324
 BoxCollider2D:
@@ -374,7 +378,7 @@ GameObject:
   - 212: {fileID: 2037513656}
   - 114: {fileID: 2037513658}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: GunRegular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +414,7 @@ Transform:
   m_GameObject: {fileID: 2037513655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -426,7 +430,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnTime: .699999988
-  AimDir: 0
+  Range: 11
+  FireDelay: .5
+  hasPower: 0
 --- !u!1 &2105932308
 GameObject:
   m_ObjectHideFlags: 0

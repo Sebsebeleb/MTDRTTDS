@@ -11,6 +11,12 @@ public class Apparatus : MonoBehaviour {
 	public bool hasPower = false;
 
 	private GameObject target;
+    private Targeting targeting;
+
+    void Awake()
+    {
+        targeting = GetComponent<Targeting>();
+    }
 
 	void Start () {
 	
@@ -23,15 +29,15 @@ public class Apparatus : MonoBehaviour {
 		
 	}
 
-	void LateUpdate () {
-		hasPower = false;
-	}
-
-	void FindTarget () {
-		//Overlapsphere check for targets here
+	void FindTarget ()
+	{
 		//if no target in sight, return
+	    target = targeting.GetCurrentTarget();
+	    if (!target) {
+	        return;
+	    }
 
-		Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // pos will be target.position
+	    Vector3 pos = target.transform.position;
 
 		if (Vector3.Distance (transform.position, pos) < Range) {
 			float deltaX = pos.x - transform.position.x;
